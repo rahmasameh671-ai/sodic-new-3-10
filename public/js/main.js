@@ -1,5 +1,5 @@
 /**
- * SODIC PREMIER DEVELOPMENTS — BY PROPERTIES-E
+ * SODIC PREMIER DEVELOPMENTS — BY PROPERTIES-Z.COM
  * Main JavaScript Engine: Form Handling, Lead Routing, Analytics & UI Interactions
  */
 
@@ -97,7 +97,7 @@ function initLeadCaptureForm() {
       countryCode: countryCode,
       rawPhone: phoneRaw,
       projectFocus: defaultProject,
-      source: 'SODIC Landing Page - The Lakes Launch - Properties',
+      source: 'SODIC Landing Page - The Lakes Launch - properties-z.com',
       routedEmails: [
         'Rahma@irtkaz.com',
         'Mostafa.a.ashmawy@gmail.com',
@@ -126,9 +126,9 @@ function initLeadCaptureForm() {
 
       // Local Storage backup persistence
       try {
-        const storedLeads = JSON.parse(localStorage.getItem('properties_eg_sodic_leads') || '[]');
+        const storedLeads = JSON.parse(localStorage.getItem('properties_z_sodic_leads') || '[]');
         storedLeads.push(data);
-        localStorage.setItem('properties_eg_sodic_leads', JSON.stringify(storedLeads));
+        localStorage.setItem('properties_z_sodic_leads', JSON.stringify(storedLeads));
       } catch (storageErr) {
         console.warn("Local storage write notice:", storageErr);
       }
@@ -151,7 +151,7 @@ function initLeadCaptureForm() {
       }
 
       const waText = encodeURIComponent(
-        `Hello properties, I just registered my interest in The Lakes at SODIC East.\n` +
+        `Hello properties-z.com, I just registered my interest in The Lakes at SODIC East.\n` +
         `Name: ${fullName}\n` +
         `Phone: ${fullPhone}`
       );
