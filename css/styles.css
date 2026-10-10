@@ -241,17 +241,7 @@ button, input, select, textarea {
    1. MAIN HEADER & NAVBAR
    ========================================================================== */
 .main-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: var(--header-height);
-  background-color: rgba(255, 255, 255, 0.94);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
-  border-bottom: 1px solid var(--border-cool);
-  z-index: 1000;
-  transition: var(--transition);
+  display: none !important;
 }
 
 .header-container {
@@ -360,7 +350,7 @@ button, input, select, textarea {
 .hero-section {
   position: relative;
   min-height: 100vh;
-  padding-top: calc(var(--header-height) + 3.5rem);
+  padding-top: 3.5rem;
   padding-bottom: 5rem;
   display: flex;
   align-items: center;
@@ -1197,7 +1187,7 @@ button, input, select, textarea {
 .about-properties-strip {
   background-color: var(--bg-alabaster);
   border-top: 1px solid var(--border-cool);
-  padding: 5.5rem 0;
+  padding: 4.5rem 0;
 }
 
 .about-content-wrapper {
@@ -1233,7 +1223,7 @@ button, input, select, textarea {
   font-size: 1rem;
   line-height: 1.8;
   color: var(--text-charcoal-secondary);
-  margin-bottom: 2.5rem;
+  margin-bottom: 0;
 }
 
 .contact-quick-list {
@@ -1588,7 +1578,7 @@ button, input, select, textarea {
   }
 
   .hero-section {
-    padding-top: calc(var(--header-height-mobile) + 2rem);
+    padding-top: 2.25rem;
     padding-bottom: 3.5rem;
   }
 
