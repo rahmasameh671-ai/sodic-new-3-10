@@ -1,0 +1,23 @@
+# Dependencies
+node_modules/
+
+# OS metadata
+.DS_Store
+Thumbs.db
+
+# Build outputs
+dist/
+.cache/
+
+# NEVER ignore public or image assets
+!public/
+!public/**
+!images/
+!images/**
+!assets/
+!assets/**
+!*.png
+!*.jpg
+!*.jpeg
+!*.webp
+!*.svg
