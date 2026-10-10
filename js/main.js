@@ -58,6 +58,7 @@ function initMobileNavigation() {
  */
 function initLeadCaptureForm() {
   const leadForm = document.getElementById('heroLeadForm');
+  const successState = document.getElementById('leadSuccessState');
   if (!leadForm) return;
 
   leadForm.addEventListener('submit', async function(e) {
@@ -82,18 +83,20 @@ function initLeadCaptureForm() {
 
     const submitBtn = leadForm.querySelector('button[type="submit"]');
     const originalBtnText = submitBtn.innerHTML;
-    submitBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> REGISTERING...';
+    submitBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Submitting...';
     submitBtn.disabled = true;
 
-    // Construct Zapier webhook payload matching exact backend schema
-    const zapierPayload = {
-      fullName: fullName,
+    const formData = new FormData(e.target);
+
+    // Grabbing form data PLUS background data
+    const data = {
+      fullName: formData.get("fullName") || fullName,
       phoneNumber: fullPhone,
+      landingPageUrl: window.location.href,       // Captures the full page URL
+      submissionDate: new Date().toISOString(),   // Captures the exact date and time
       countryCode: countryCode,
       rawPhone: phoneRaw,
       projectFocus: defaultProject,
-      landingPageUrl: window.location.href,
-      submissionDate: new Date().toISOString(),
       source: 'SODIC Landing Page - The Lakes Launch - Properties',
       routedEmails: [
         'Rahma@irtkaz.com',
@@ -102,74 +105,75 @@ function initLeadCaptureForm() {
       ]
     };
 
-    // Dispatch lead directly to Zapier Webhook
     try {
       await fetch("https://hooks.zapier.com/hooks/catch/25429357/uclzmpn/", {
         method: "POST",
-        body: JSON.stringify(zapierPayload),
+        body: JSON.stringify(data),
       });
-    } catch (error) {
-      console.warn("Zapier Webhook Notice:", error);
-    }
 
-    // Local Storage backup persistence
-    try {
-      const storedLeads = JSON.parse(localStorage.getItem('properties_eg_sodic_leads') || '[]');
-      storedLeads.push(zapierPayload);
-      localStorage.setItem('properties_eg_sodic_leads', JSON.stringify(storedLeads));
-    } catch (e) {
-      console.warn("Local storage write notice:", e);
-    }
-
-    // Google Analytics 4 Lead Event
-    if (typeof gtag === 'function') {
-      gtag('event', 'generate_lead', {
-        event_category: 'Lead Capture',
-        event_label: defaultProject
-      });
-    }
-
-    // Google Ads conversion event
-    if (typeof gtag_report_conversion === 'function') {
-      gtag_report_conversion();
-    } else if (typeof gtag === 'function') {
-      gtag('event', 'conversion', {
-        'send_to': 'AW-18462270869/DjcxCIfusYIdEJXLv-NE'
-      });
-    }
-
-    const waText = encodeURIComponent(
-      `Hello properties, I just registered my interest in The Lakes at SODIC East.\n` +
-      `Name: ${fullName}\n` +
-      `Phone: ${fullPhone}`
-    );
-    const whatsappUrl = `https://wa.me/201033373331?text=${waText}`;
-
-    submitBtn.innerHTML = '<i class="fa-solid fa-check"></i> INTEREST REGISTERED';
-    submitBtn.style.backgroundColor = '#1A202C';
-
-    showToast(
-      'Interest Registered',
-      `Thank you ${fullName}. Your inquiry has been routed to our senior property consultants.`
-    );
-
-    leadForm.reset();
-
-    setTimeout(() => {
-      if (confirm(`Thank you ${fullName}! Would you like to connect directly via WhatsApp (+201033373331) for instant brochures, floorplans, and pricing details for The Lakes at SODIC East?`)) {
-        if (typeof gtag_report_conversion === 'function') {
-          gtag_report_conversion(whatsappUrl);
-        } else {
-          window.open(whatsappUrl, '_blank');
-        }
+      // Show Thank You success state matching requested design
+      if (successState) {
+        successState.style.display = 'block';
+        leadForm.style.display = 'none';
       }
-    }, 700);
 
-    setTimeout(() => {
+      showToast(
+        'Thank You!',
+        'Your details have been received. We will be in touch shortly.'
+      );
+
+      e.target.reset();
+
+      // Local Storage backup persistence
+      try {
+        const storedLeads = JSON.parse(localStorage.getItem('properties_eg_sodic_leads') || '[]');
+        storedLeads.push(data);
+        localStorage.setItem('properties_eg_sodic_leads', JSON.stringify(storedLeads));
+      } catch (storageErr) {
+        console.warn("Local storage write notice:", storageErr);
+      }
+
+      // Google Analytics 4 Lead Event
+      if (typeof gtag === 'function') {
+        gtag('event', 'generate_lead', {
+          event_category: 'Lead Capture',
+          event_label: defaultProject
+        });
+      }
+
+      // Google Ads conversion event
+      if (typeof gtag_report_conversion === 'function') {
+        gtag_report_conversion();
+      } else if (typeof gtag === 'function') {
+        gtag('event', 'conversion', {
+          'send_to': 'AW-18462270869/DjcxCIfusYIdEJXLv-NE'
+        });
+      }
+
+      const waText = encodeURIComponent(
+        `Hello properties, I just registered my interest in The Lakes at SODIC East.\n` +
+        `Name: ${fullName}\n` +
+        `Phone: ${fullPhone}`
+      );
+      const whatsappUrl = `https://wa.me/201033373331?text=${waText}`;
+
+      setTimeout(() => {
+        if (confirm(`Thank you ${fullName}! Would you like to connect directly via WhatsApp (+201033373331) for instant brochures, floorplans, and pricing details for The Lakes at SODIC East?`)) {
+          if (typeof gtag_report_conversion === 'function') {
+            gtag_report_conversion(whatsappUrl);
+          } else {
+            window.open(whatsappUrl, '_blank');
+          }
+        }
+      }, 700);
+
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Something went wrong. Please try again.");
+    } finally {
       submitBtn.innerHTML = originalBtnText;
       submitBtn.disabled = false;
-      submitBtn.style.backgroundColor = '';
-    }, 4000);
+    }
   });
 }
 
