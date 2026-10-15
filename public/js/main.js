@@ -146,7 +146,7 @@ function initLeadCaptureForm() {
         gtag_report_conversion();
       } else if (typeof gtag === 'function') {
         gtag('event', 'conversion', {
-          'send_to': 'AW-18462270869/DjcxCIfusYIdEJXLv-NE'
+          'send_to': 'AW-17705943670'
         });
       }
 
@@ -240,7 +240,7 @@ function initAnalyticsTracking() {
         gtag_report_conversion();
       } else if (typeof gtag === 'function') {
         gtag('event', 'conversion', {
-          'send_to': 'AW-18462270869/DjcxCIfusYIdEJXLv-NE'
+          'send_to': 'AW-17705943670'
         });
       }
     });
