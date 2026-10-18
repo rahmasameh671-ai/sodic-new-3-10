@@ -238,6 +238,43 @@ button, input, select, textarea {
 }
 
 /* ==========================================================================
+   0. BROKERAGE COMPLIANCE TOPBAR (GOOGLE ADS POLICY COMPLIANCE)
+   ========================================================================== */
+.broker-compliance-topbar {
+  background-color: var(--text-charcoal-primary);
+  color: #E2E8F0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 0.55rem 1.25rem;
+  text-align: center;
+  position: relative;
+  z-index: 100;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  line-height: 1.45;
+}
+
+.broker-compliance-topbar i {
+  color: #60A5FA;
+  font-size: 0.85rem;
+}
+
+.broker-compliance-topbar strong {
+  color: #FFFFFF;
+}
+
+.broker-compliance-topbar a {
+  color: #93C5FD;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  margin-left: 6px;
+}
+
+/* ==========================================================================
    1. MAIN HEADER & NAVBAR
    ========================================================================== */
 .main-header {
@@ -416,6 +453,12 @@ button, input, select, textarea {
   object-fit: contain;
 }
 
+.hero-branding-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
 .hero-subbadge {
   font-size: 0.775rem;
   font-weight: 700;
@@ -427,6 +470,16 @@ button, input, select, textarea {
   padding: 6px 14px;
   border-radius: var(--radius-full);
   box-shadow: var(--shadow-subtle);
+  display: inline-block;
+  width: fit-content;
+}
+
+.hero-partner-role {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
 }
 
 .hero-launch-badge {
@@ -537,6 +590,17 @@ button, input, select, textarea {
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--text-muted);
+}
+
+.hero-disclaimer-note {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-top: 1rem;
+  padding: 8px 12px;
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: var(--radius-sm);
+  border: 1px dashed var(--border-cool);
 }
 
 /* Right Column: Frosted Glass Lead Capture Form */
@@ -704,13 +768,41 @@ button, input, select, textarea {
   padding-left: 44px;
 }
 
-/* Mandatory Location A Brokerage Disclaimer */
+/* Mandatory Location A Brokerage & Consent Disclaimer */
+.form-consent-box {
+  margin-top: 0.85rem;
+  text-align: left;
+  background-color: rgba(255, 255, 255, 0.7);
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-cool);
+}
+
 .form-disclaimer {
-  font-size: 0.72rem;
-  line-height: 1.55;
+  font-size: 0.725rem;
+  line-height: 1.5;
+  color: var(--text-charcoal-secondary);
+  margin-bottom: 0.4rem;
+}
+
+.form-legal-inline {
+  color: var(--text-charcoal-primary);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.form-legal-inline:hover {
+  color: #000000;
+}
+
+.form-disclaimer-sub {
+  font-size: 0.675rem;
+  line-height: 1.45;
   color: var(--text-muted);
-  text-align: center;
-  margin-top: 0.75rem;
+  border-top: 1px solid var(--border-cool-subtle);
+  padding-top: 4px;
+  margin-top: 4px;
 }
 
 /* Location A Standalone Clickable Legal Links */
@@ -719,7 +811,7 @@ button, input, select, textarea {
   align-items: center;
   justify-content: center;
   gap: 12px;
-  margin-top: 0.25rem;
+  margin-top: 0.5rem;
   font-size: 0.75rem;
 }
 
@@ -1279,9 +1371,31 @@ button, input, select, textarea {
 
 .footer-top-grid {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  gap: 48px;
-  margin-bottom: 4rem;
+  grid-template-columns: 1.4fr 1fr 1fr 1.3fr;
+  gap: 36px;
+  margin-bottom: 3.5rem;
+}
+
+.footer-compliance-text {
+  font-size: 0.825rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+}
+
+.footer-compliance-text strong {
+  color: var(--text-charcoal-primary);
+}
+
+.footer-contact-link {
+  color: var(--text-charcoal-primary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  font-weight: 600;
+  transition: var(--transition-fast);
+}
+
+.footer-contact-link:hover {
+  color: #000000;
 }
 
 .footer-brand-col {
@@ -1660,5 +1774,18 @@ button, input, select, textarea {
     left: 16px;
     top: 80px;
     max-width: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .footer-top-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .broker-compliance-topbar {
+    font-size: 0.68rem;
+    padding: 0.5rem 0.75rem;
+    flex-wrap: wrap;
+    line-height: 1.4;
   }
 }
