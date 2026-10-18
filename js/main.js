@@ -115,6 +115,8 @@ function initLeadCaptureForm() {
       if (successState) {
         successState.style.display = 'block';
         leadForm.style.display = 'none';
+        const cardHeader = document.querySelector('.lead-card-header');
+        if (cardHeader) cardHeader.style.display = 'none';
       }
 
       showToast(
@@ -134,32 +136,14 @@ function initLeadCaptureForm() {
       }
 
       // Lead conversion event (fires if gtag or gtag_report_conversion is configured)
-      if (typeof gtag === 'function') {
+      if (typeof gtag_report_conversion === 'function') {
+        gtag_report_conversion();
+      } else if (typeof gtag === 'function') {
         gtag('event', 'generate_lead', {
           event_category: 'Lead Capture',
           event_label: defaultProject
         });
       }
-      if (typeof gtag_report_conversion === 'function') {
-        gtag_report_conversion();
-      }
-
-      const waText = encodeURIComponent(
-        `Hello properties-z.com, I just registered my interest in The Lakes at SODIC East.\n` +
-        `Name: ${fullName}\n` +
-        `Phone: ${fullPhone}`
-      );
-      const whatsappUrl = `https://wa.me/201033373331?text=${waText}`;
-
-      setTimeout(() => {
-        if (confirm(`Thank you ${fullName}! Would you like to connect directly via WhatsApp (+201033373331) for instant brochures, floorplans, and pricing details for The Lakes at SODIC East?`)) {
-          if (typeof gtag_report_conversion === 'function') {
-            gtag_report_conversion(whatsappUrl);
-          } else {
-            window.open(whatsappUrl, '_blank');
-          }
-        }
-      }, 700);
 
     } catch (error) {
       console.error("Error:", error);
@@ -169,6 +153,16 @@ function initLeadCaptureForm() {
       submitBtn.disabled = false;
     }
   });
+
+  const resetBtn = document.getElementById('resetLeadFormBtn');
+  if (resetBtn && successState && leadForm) {
+    resetBtn.addEventListener('click', () => {
+      successState.style.display = 'none';
+      leadForm.style.display = '';
+      const cardHeader = document.querySelector('.lead-card-header');
+      if (cardHeader) cardHeader.style.display = '';
+    });
+  }
 }
 
 /**
