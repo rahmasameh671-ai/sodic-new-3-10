@@ -1,5 +1,5 @@
 /**
- * SODIC PREMIER DEVELOPMENTS — BY PROPERTIES-Z.COM
+ * SODIC PREMIER DEVELOPMENTS — BY PROPERTIES-S.COM
  * Main JavaScript Engine: Form Handling, Lead Routing, Analytics & UI Interactions
  */
 
@@ -97,7 +97,7 @@ function initLeadCaptureForm() {
       countryCode: countryCode,
       rawPhone: phoneRaw,
       projectFocus: defaultProject,
-      source: 'SODIC Landing Page - The Lakes Launch - properties-z.com',
+      source: 'SODIC Landing Page - The Lakes Launch - properties-s.com',
       routedEmails: [
         'Rahma@irtkaz.com',
         'Mostafa.a.ashmawy@gmail.com',
@@ -128,9 +128,9 @@ function initLeadCaptureForm() {
 
       // Local Storage backup persistence
       try {
-        const storedLeads = JSON.parse(localStorage.getItem('properties_z_sodic_leads') || '[]');
+        const storedLeads = JSON.parse(localStorage.getItem('properties_s_sodic_leads') || '[]');
         storedLeads.push(data);
-        localStorage.setItem('properties_z_sodic_leads', JSON.stringify(storedLeads));
+        localStorage.setItem('properties_s_sodic_leads', JSON.stringify(storedLeads));
       } catch (storageErr) {
         console.warn("Local storage write notice:", storageErr);
       }
