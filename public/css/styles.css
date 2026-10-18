@@ -238,7 +238,7 @@ button, input, select, textarea {
 }
 
 /* ==========================================================================
-   0. BROKERAGE COMPLIANCE TOPBAR (GOOGLE ADS POLICY COMPLIANCE)
+   0. INDEPENDENT REAL ESTATE CONSULTANCY COMPLIANCE TOPBAR (GOOGLE ADS POLICY COMPLIANCE)
    ========================================================================== */
 .broker-compliance-topbar {
   background-color: var(--text-charcoal-primary);
@@ -768,7 +768,7 @@ button, input, select, textarea {
   padding-left: 44px;
 }
 
-/* Mandatory Location A Brokerage & Consent Disclaimer */
+/* Mandatory Location A Independent Real Estate Consultancy & Consent Disclaimer */
 .form-consent-box {
   margin-top: 0.85rem;
   text-align: left;
@@ -1460,7 +1460,7 @@ button, input, select, textarea {
   padding-left: 4px;
 }
 
-/* Mandatory Location B Brokerage Disclaimer */
+/* Mandatory Location B Independent Real Estate Consultancy Disclaimer */
 .footer-disclosures-block {
   border-top: 1px solid var(--border-cool);
   padding-top: 2.5rem;
