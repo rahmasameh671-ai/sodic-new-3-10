@@ -133,21 +133,15 @@ function initLeadCaptureForm() {
         console.warn("Local storage write notice:", storageErr);
       }
 
-      // Google Analytics 4 Lead Event
+      // Lead conversion event (fires if gtag or gtag_report_conversion is configured)
       if (typeof gtag === 'function') {
         gtag('event', 'generate_lead', {
           event_category: 'Lead Capture',
           event_label: defaultProject
         });
       }
-
-      // Google Ads conversion event: Run exact conversion code
       if (typeof gtag_report_conversion === 'function') {
         gtag_report_conversion();
-      } else if (typeof gtag === 'function') {
-        gtag('event', 'conversion', {
-          'send_to': 'AW-17705943670/x9dFCPPh9bobEPaE7fpB'
-        });
       }
 
       const waText = encodeURIComponent(
@@ -236,16 +230,8 @@ function initAnalyticsTracking() {
         });
       }
 
-      // Ensure gtag_report_conversion runs if not already triggered by inline onclick
-      const hasInlineHandler = this.getAttribute('onclick') && this.getAttribute('onclick').includes('gtag_report_conversion');
-      if (!hasInlineHandler) {
-        if (typeof gtag_report_conversion === 'function') {
-          gtag_report_conversion(this.getAttribute('href'));
-        } else if (typeof gtag === 'function') {
-          gtag('event', 'conversion', {
-            'send_to': 'AW-17705943670/x9dFCPPh9bobEPaE7fpB'
-          });
-        }
+      if (typeof gtag_report_conversion === 'function') {
+        gtag_report_conversion(this.getAttribute('href'));
       }
     });
   });
